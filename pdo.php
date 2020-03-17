@@ -4,7 +4,7 @@ try
     $user = "root";
     $pass = 'root';
     $db = new PDO('mysql:host=localhost;dbname=kf', $user, $pass);
-    //echo "Connexion avec succes!";
+    echo "Connexion avec succes!";
 
   } catch (PDOException $e)
   {
