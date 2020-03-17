@@ -1,14 +1,14 @@
 <?php
-try
- {
-    $user = "root";
-    $pass = 'root';
-    $db = new PDO('mysql:host=localhost;dbname=kf', $user, $pass);
-    echo "Connexion avec succes!";
+$serveur = 'localhost';
+$dbname = 'kf';
+$user = 'root';
+$mdp = 'root';
 
-  } catch (PDOException $e)
-  {
-    print "Erreur !: " . $e->getMessage() . "<br/>";
-    die();
-  }
+try {
+    $db = new PDO('mysql:host='.$serveur.';dbname='.$dbname,$user,$mdp,
+        [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING]);
+} catch (PDOException $e) {
+    echo "Erreur lors de la connexion à la BD ".$e->getMessage();
+}
 ?>

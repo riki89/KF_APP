@@ -1,10 +1,17 @@
 <?php
 include_once 'pdo.php';
 
-function ajout($nom, $lieu, $objet, $date)
+function ajout($nom, $date, $lieu, $objet)
 {
-    global $bd;
-    $req = "INSERT INTO activite values (null,  '$nom', null , '$lieu', 0)";
-    $bd->exec($req);
+    global $db;
+    $req = "INSERT INTO activite VALUES (null,  '$nom', '$date', '$lieu', '$objet', 0)";
+    $db->exec($req);
 
+}
+
+function afficherListe()
+{
+    global $db;
+    $req = "SELECT * FROM activite  ";
+    return $db->query($req)->fetchAll();
 }
