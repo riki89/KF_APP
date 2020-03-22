@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once 'header.php';
-include_once 'navbar.php';
 require_once 'fonctions/requetes.php';
 
 if(isset($_POST['btnConnecter'])) {
