@@ -5,26 +5,28 @@
 
   <link rel="stylesheet" type="text/css" href="/kf/public/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="/kf/public/css/mdb.css">
-<nav class="navbar navbar-dark default-color justify-content-between">
-  <a class="navbar-brand" href="#">KF</a>
-    <a href="index.php" class="btn btn-sm btn-primary">DECONEXION</a>
+  <nav class="navbar navbar-dark default-color justify-content-between">
+  <a href="accueil.php" class="btn btn-sm btn-primary" >KF</a>
+
   <form class="form-inline my-1">
-      <div class="row mt-4" >
+  	
+  	 <a href="membre.php" class="btn btn-sm btn-primary">liste des membre</a>
+   
+        <a href="ajoutProd.php" class="btn btn-sm btn-primary">ajouter un membre</a>
 
-          <div class="col-md-2 offset-4">
+    </div>
+</div>
+  	
+    <a href="index.php" class="btn  btn-sm btn-danger">DECONEXION</a>
 
-
-          </div>
-      </div>
-
-
+ 
 
   </form>
 </nav>
 <script src="/kf/public/js/jquery-3.4.1.min.js"></script>
 <script src="/kf/public/js/bootstrap.js"></script>
 <script src="/kf/public/js/mdb.js"></script>
-<h1> KORBE FAMILY</h1>
+<h1 align="center"><marquee> KORBE FAMILY KO FI FOW</marquee></h1>
 
 
 </body>

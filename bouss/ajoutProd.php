@@ -1,25 +1,32 @@
 
 <?php
+ include_once 'navbar.php';
 include_once'header.php';
 require_once 'fonctions/requetes.php';
 
 
 
+
 if(isset($_POST['enreg'])) {
     extract($_POST);
-    if (addPersonne($nom, $prenom, $tel, $mail, $adresse, $fonction, $login, $mdp) != 1) {
-        header("location:/kf/accueil.php");
+    if(!empty($nom) && !empty($prenom) && !empty($tel) && !empty($mail) && !empty($adresse) && !empty($fonction) && !empty($login) && !empty($mdp))
+    {
 
-    } else echo "erreur";
+       if (addPersonne($nom, $prenom, $tel, $mail, $adresse, $fonction, $login, $mdp) != 1) {
+        header("location:/kf/membre.php");
+
+    } else echo "erreur"; 
+    }
+    
 }
 
 ?>
 
-<div class="card mt-4 container col-md-8">
+    <div class="card mt-4 container col-md-8">
 
-    <h5 class="card-header aqua-gradient info-color white-text text-center py-4">
-        <strong>AJOUT MEMBRE</strong>
-    </h5>
+        <h5 class="card-header aqua-gradient info-color white-text text-center py-4">
+            <strong>AJOUT MEMBRE</strong>
+        </h5>
 
     <div class="card-body">
         <form method="post" action="">
@@ -57,7 +64,7 @@ if(isset($_POST['enreg'])) {
                     <label>MAIL</label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="mail" class="form-control">
+                    <input type="mail" name="mail" class="form-control">
                 </div>
 
             </div>
@@ -111,7 +118,7 @@ if(isset($_POST['enreg'])) {
 
 
 
-    <!-- Material form login -->
+<!-- Material form login -->
 
 
 <?php
