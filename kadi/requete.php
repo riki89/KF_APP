@@ -1,14 +1,6 @@
 <?php
 include_once 'pdo.php';
 
-    if (isset($_post["ajouter"])) {
-    	extract($_post);
-    	$res = function ajout($nom, $date, $lieu, $objet)
-    if ($res==1){
-    	header("requete.php");
-     } 
-    }
-
 function ajout($nom, $date, $lieu, $objet)
 {
     global $db;
@@ -17,7 +9,7 @@ function ajout($nom, $date, $lieu, $objet)
 
 }
 
-function affichage()
+function afficherListe()
 {
     global $db;
     $req = "SELECT * FROM activite  ";

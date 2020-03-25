@@ -1,46 +1,109 @@
 <?php
 include_once 'requete.php';
+include_once 'header.php';
 
 
 if (isset($_POST['ajouter']))
 {
-    extract($_POST);
-    ajout($nom, $datea, $lieu, $objet ) ;
-    echo "Insertion realisee avec succes ";
+    if (empty($_POST['nom'] && $_POST['lieu'] && $_POST['objet'] && $_POST['datea']))
+    {
+        echo 'VEILLEZ REMPLIR TOUS LES CHAMPS';
+    }
+    elseif (isset($_GET['idactiviteMod']))
+        {
+            $id = $_GET['idactiviteMod'];
+            $act = getActivite($id);
+            extract($_POST);
+            modifier($id, $nom, $lieu, $objet ,$datea);
+            echo "Modification realisee avec succes ";
+        } else
+            {
+                extract($_POST);
+                ajout($nom, $datea, $lieu, $objet ) ;
+                echo "Insertion realisee avec succes ";
+            }
+}
+if (isset($_GET['idactiviteMod']))
+{
+    $id = $_GET['idactiviteMod'];
+    $act = getActivite($id);
+}
+
+if(isset($_GET['idactiviteSup']))
+{
+    echo 'deleting';
+    $id = $_GET['idactiviteSup'];
+    if (supprimer($id) == 1)
+    {
+        header("location:/KF_APP/kadi/kf.php");
+    }
 }
 
 ?>
 <link rel="stylesheet" href="../bootstrap-4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<form method="post" action="">
-    <div class="form-row">
-        <div class="form-group col-md-8">
-            <label for="inputEmail4">NOM</label>
-            <input type="text" class="form-control" id="inputEmail4" name="nom" placeholder="Nom activite">
+
+
+
+
+
+<div class="container mt-5">
+
+    <div class="col-md-10 offset-1">
+        <div class="card">
+            <div class="card-header blue lighten-4 text-center text-uppercase h4 font-weight-bold">
+                Nouvelle activite
+            </div>
+            <div class="card-body">
+                <form action="" method="post">
+
+                    <div class="row mt-4">
+                        <div class="col-md-2 text-center">
+                            <label for="nom" class="h5">NOM</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="nom" placeholder="nom-activite" value= "<?= $act['nom'] ?>" >
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <label for="prenom" class="h5">LIEU</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="lieu"  value= "<?= $act['lieu'] ?>"  placeholder="lieu-activite">
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-2 text-center">
+                            <label for="tel" class="h5">OBJET</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="objet" value="<?= $act['objet'] ?>"  placeholder="objet-activite">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="col-md-2 text-center">
+                                <label for="inputCity">DATE</label>
+                            </div>
+                                <input type="date" class="form-control" name="datea"  value="<?= $act['dateA'] ?>" id="inputCity">
+                        </div>
+                    </div>
+
+
+                    <button type="submit" name="ajouter" class="btn btn-primary">ENREGISTRER</button>
+                </form>
+            </div>
         </div>
-
-        <div class="form-group col-md-8"">
-        <label for="inputAddress">LIEU</label>
-        <input type="text" class="form-control" id="inputAddress" name="lieu" placeholder="Lieu activite">
     </div>
-    <div class="form-group col-md-8"">
-    <label for="inputAddress">OBJET</label>
-    <input type="text" class="form-control" id="inputAddress"  name="objet" placeholder="Objet activite">
-    </div>
-    </div>
-
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputCity">DATE</label>
-            <input type="date" class="form-control" name="datea" id="inputCity">
-        </div>
-
-    </div>
-
-    <button type="submit" name="ajouter" class="btn btn-primary">ENREGISTRER</button>
-</form>
+</div>
+<br>
+<br>
 
 
-<h5 class="card-header aqua-gradient info-color white-text text-center py-1">
+
+
+
+
+
+<h5 class="card-header aqua-gradient info-color white-text text-center py-1 ">
     <strong>LISTE DES ACTIVITE</strong>
 </h5>
 
@@ -67,6 +130,8 @@ if (isset($_POST['ajouter']))
                 <td> <?= $p['lieu'] ?> </td>
                 <td> <?= $p['objet'] ?> </td>
                 <td> <?= $p['idCompteRendu'] ?> </td>
+                <td> <a href="kf.php?idactiviteSup=<?= $p['idactivite']?>" class="btn btn-sm btn-danger">Supprimer</a></td></td>
+                <td colspan="2"><a href="kf.php?idactiviteMod=<?= $p['idactivite']?>" class="btn btn-sm btn-warning">Modifier</a>
             </tr>
 
         <?php  }
@@ -77,4 +142,7 @@ if (isset($_POST['ajouter']))
     </table>
 </div>
 
-</div>
+<?php
+ include_once 'footer.php';
+?>
+
