@@ -1,4 +1,5 @@
 <?php
+//my first comment
        include_once 'navbar.php';
        include_once'header.php'; 
        require_once'fonctions/requetes.php';
