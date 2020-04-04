@@ -1,4 +1,5 @@
 <?php
+
 include_once 'requete.php';
 include_once 'header.php';
 
@@ -27,6 +28,7 @@ if (isset($_GET['idactiviteMod']))
 {
     $id = $_GET['idactiviteMod'];
     $act = getActivite($id);
+    //print_r ($act);
 }
 
 if(isset($_GET['idactiviteSup']))
@@ -40,7 +42,7 @@ if(isset($_GET['idactiviteSup']))
 }
 
 ?>
-<link rel="stylesheet" href="../bootstrap-4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="../public/asset/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
 
