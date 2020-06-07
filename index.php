@@ -69,5 +69,5 @@ if (isset($_GET['erreur'])){
 }
 ?>
 <?php
-include_once 'members/footer.php';
+//include_once 'members/footer.php';
 ?>

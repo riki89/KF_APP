@@ -1,7 +1,7 @@
 <?php
     include_once '../public/fonctions/requetes.php';
     include_once '../folders/navbar.php';
-    include_once '../folder/header.php';
+    include_once '../public/header.php';
     if(isset($_POST['enreg'])) {
         extract($_POST);
         if(!empty($nom) && !empty($prenom) && !empty($tel) && !empty($mail) && !empty($adresse) && !empty($fonction) && !empty($login) && !empty($mdp))
@@ -117,5 +117,5 @@
 
 
 <?php
-include_once'footer.php';
+//include_once'footer.php';
 ?>
