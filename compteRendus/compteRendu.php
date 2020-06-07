@@ -1,9 +1,14 @@
 <?php
 include_once '../public/fonctions/requetes.php';
 include_once '../folders/navbar.php';
+<<<<<<< HEAD
 include_once '../folder/header.php';
 include_once 'navbar.php';
     
+=======
+include_once '../public/header.php';
+
+>>>>>>> 11dbe8f475c08644d65de3a112d66580fc7b8732
 
 
 if (isset($_POST['ajouter']))

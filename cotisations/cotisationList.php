@@ -2,7 +2,7 @@
 
     include_once '../public/fonctions/requetes.php';
     include_once '../folders/navbar.php';
-    include_once '../folder/header.php';
+    include_once '../public/header.php';
     include_once 'functions.php';
     //include_once 'subNav.php';
 ?>
@@ -87,5 +87,5 @@
     
 
     <?php
-    include_once 'footer.php';
+   // include_once 'footer.php';
     ?>
