@@ -104,6 +104,7 @@ require_once 'bdd.php';
         return $base->exec($req);
     }
 
+    /*
     function addCompteRendu($activity, $ordreJour, $contenu )
     {
         global $base;
@@ -111,6 +112,7 @@ require_once 'bdd.php';
         //echo "<br> $req";
         return $base->exec($req);
     }
+    */
 
     function affichage()
     {

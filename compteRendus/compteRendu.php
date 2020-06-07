@@ -9,8 +9,8 @@ if (isset($_POST['ajouter']))
 {
    header('location:compteRendu.php');
     extract($_POST);
-    //addCompteRendu($odj, $point1, $point2, $point3, $point4, $point5, $divers ) ;
-    addCompteRendu($odj, $activity, $ordreJour, $contenu) ;
+    addCompteRendu($odj, $point1, $point2, $point3, $point4, $point5, $divers ) ;
+    //addCompteRendu($odj, $activity, $ordreJour, $contenu) ;
     
 }
    
