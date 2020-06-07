@@ -110,6 +110,15 @@ require_once 'bdd.php';
     {
         global $base;
         $req="INSERT INTO compte_rendu values(null, '$odj', '$point1', '$point2', '$point3', '$point4', '$point5', '$divers')";
+        //$req="INSERT INTO compterendu values(null, '$activity', '$ordreJour', '$contenu',)";
+        //echo "<br> $req";
+        return $base->exec($req);
+    }
+
+    function addCompteRendu_new($activity, $ordreJour, $contenu )
+    {
+        global $base;
+        $req="INSERT INTO compterendu values(null, $activity, '$ordreJour', '$contenu')";
         //echo "<br> $req";
         return $base->exec($req);
     }
@@ -117,7 +126,8 @@ require_once 'bdd.php';
     function affichage()
     {
         global $base;
-        $req = "SELECT * FROM compte_rendu";
+        //$req = "SELECT * FROM compte_rendu";
+        $req = "SELECT * FROM compterendu";
         return $base->query($req)->fetchAll();
     }
     /*  -----------------------------------
