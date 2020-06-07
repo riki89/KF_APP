@@ -2,7 +2,7 @@
 
 include_once '../public/fonctions/requetes.php';
 include_once '../folders/navbar.php';
-include_once '../folder/header.php';
+include_once '../public/header.php';
 
 
 if (isset($_POST['ajouter']))
@@ -146,6 +146,6 @@ if(isset($_GET['idactiviteSup']))
 </div>
 
 <?php
- include_once 'footer.php';
+// include_once 'footer.php';
 ?>
 

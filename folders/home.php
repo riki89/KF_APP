@@ -1,6 +1,6 @@
 <?php
 include_once 'navbar.php';
-include_once '../members/header.php';
+include_once '../public/header.php';
 require_once '../public/fonctions/requetes.php';
 $personne = getPersonne();
 
