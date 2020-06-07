@@ -115,7 +115,3 @@
 
 <!-- Material form login -->
 
-
-<?php
-//include_once'footer.php';
-?>

@@ -64,12 +64,22 @@ require_once 'bdd.php';
         $req = "INSERT INTO activite VALUES (null,  '$nom', '$date', '$lieu', '$objet', 0)";
         $base->exec($req);
     }
+
+    function  getActi()
+    {
+        global $base;
+        $req = "SELECT * FROM  activite WHERE idactivite = idactivite ORDER BY idactivite";
+        return $base->query($req)->fetchAll();
+
+    }
+
+   
     
     function getActivite($id)
     {
         global $base;
         $req = "SELECT * FROM activite WHERE idactivite = $id";
-        return $base->query($req)->fetch();
+        return $base->query($req)->fetchAll();
     }
     function afficherListe()
     {
