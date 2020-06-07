@@ -1,151 +1,142 @@
 <?php
 
-include_once '../public/fonctions/requetes.php';
-include_once '../folders/navbar.php';
-include_once '../folder/header.php';
+    include_once '../public/fonctions/requetes.php';
+    include_once '../folders/navbar.php';
+    include_once '../folder/header.php';
+    include_once 'navbar.php';
 
-
-if (isset($_POST['ajouter']))
-{
-    if (empty($_POST['nom'] && $_POST['lieu'] && $_POST['objet'] && $_POST['datea']))
+    if (isset($_POST['ajouter']))
     {
-        echo 'VEILLEZ REMPLIR TOUS LES CHAMPS';
-    }
-    elseif (isset($_GET['idactiviteMod']))
+        /*if (empty($_POST['membre'] && $_POST['dateC'] && $_POST['montant']))
         {
-            $id = $_GET['idactiviteMod'];
-            $act = getActivite($id);
+            echo 'VEILLEZ REMPLIR TOUS LES CHAMPS';
+        }
+        else
+        */
+        if (isset($_GET['idcMod']))
+        {
+            $id = $_GET['idcMod'];
+            $cotiz = findCotizByID($id);
             extract($_POST);
-            modifierActivity($id, $nom, $lieu, $objet ,$datea);
+            editCotiz($id, $dateC, $membre, $montant ,$desc);
             echo "Modification realisee avec succes ";
         } else
-            {
-                extract($_POST);
-                ajout($nom, $datea, $lieu, $objet ) ;
-                echo "Insertion realisee avec succes ";
-            }
-}
-if (isset($_GET['idactiviteMod']))
-{
-    $id = $_GET['idactiviteMod'];
-    $act = getActivite($id);
-    //print_r ($act);
-}
-
-if(isset($_GET['idactiviteSup']))
-{
-    echo 'deleting';
-    $id = $_GET['idactiviteSup'];
-    if (supprimer($id) == 1)
-    {
-        header("location:activity.php");
+        {
+            extract($_POST);
+           // echo "Member: ".$membre." date: ".$dateC." montant: ".$montant." desc: ".$desc;
+            addCotisation( $dateC, $membre, $montant, $desc) ;
+            echo "Insertion realisee avec succes ";
+        }
     }
-}
+    if (isset($_GET['idcMod']))
+    {
+        $id = $_GET['idcMod'];
+        $cotiz = findCotizByID($id);
+        //print_r ($act);
+    }
 
-?>
-<link rel="stylesheet" href="../public/asset/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    if(isset($_GET['idcSup']))
+    {
+        $id = $_GET['idcSup'];
+        if (supprimerCotisation($id) == 1)
+        {
+            header("location:cotisation.php");
+        }
+    }
 
+    ?>
 
+    <div class="container mt-5">
 
-
-
-<div class="container mt-5">
-
-    <div class="col-md-10 offset-1">
-        <div class="card">
-            <div class="card-header blue lighten-4 text-center text-uppercase h4 font-weight-bold">
-                Nouvelle activite
-            </div>
-            <div class="card-body">
-                <form action="" method="post">
-
-                    <div class="row mt-4">
-                        <div class="col-md-2 text-center">
-                            <label for="nom" class="h5">NOM</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="nom" placeholder="nom-activite" value= "<?= $act['nom'] ?>" >
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <label for="prenom" class="h5">LIEU</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="lieu"  value= "<?= $act['lieu'] ?>"  placeholder="lieu-activite">
-                        </div>
-
-                    </div>
-
-                    <div class="row mt-4">
-                        <div class="col-md-2 text-center">
-                            <label for="tel" class="h5">OBJET</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="objet" value="<?= $act['objet'] ?>"  placeholder="objet-activite">
-                        </div>
-                        <div class="form-group col-md-6">
+        <div class="col-md-10 offset-1">
+            <div class="card">
+                <div class="card-header blue lighten-4 text-center text-uppercase h4 font-weight-bold">
+                    Nouvelle cotisation
+                </div>
+                <div class="card-body">
+                    <form action="" method="post">
+                        <div class="row mt-4">
                             <div class="col-md-2 text-center">
-                                <label for="inputCity">DATE</label>
+                                <label for="membre" class="h5">MEMBRE</label>
                             </div>
-                                <input type="date" class="form-control" name="datea"  value="<?= $act['dateA'] ?>" id="inputCity">
+                            <div class="col-md-4">
+                                <select default="Selectionner" name="membre">
+                                    <option value="" selected>
+                                        Choir un membre 
+                                    </option>
+                                        <?php
+                                        $membres = getPersonne();
+                                        foreach ($membres as $membre)
+                                        {?>
+                                            <option value = "<?= $membre['idP']?>" >
+                                                <?= $membre['prenomP']?>
+                                            </option>
+                                        <?php } ?>
+                                </select> 
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <label for="tel" class="h5">MONTANT</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="montant" value="<?= $cotiz['montant'] ?>"  placeholder="montant">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="col-md-2 text-center">
+                                    <label for="inputCity">DATE</label>
+                                </div>
+                                    <input type="date" class="form-control" name="dateC"  value="<?= $cotiz['dateC'] ?>" id="inputCity">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="col-md-2 text-center">
+                                    <label for="inputCity">DESCRIPTION</label>
+                                </div>
+                                    <input type="TEXTAREA" class="form-control" name="desc"  value="<?= $cotiz['description'] ?>" id="desc">
+                            </div>
                         </div>
-                    </div>
-
-
-                    <button type="submit" name="ajouter" class="btn btn-primary">ENREGISTRER</button>
-                </form>
+                        <button type="submit" name="ajouter" class="btn btn-primary">ENREGISTRER</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<br>
-<br>
+    <br>
+    <br>
+    <h5 class="card-header aqua-gradient info-color white-text text-center py-1 ">
+        <strong>LISTE DES COTISATIONS</strong>
+    </h5>
 
-
-
-
-
-
-
-<h5 class="card-header aqua-gradient info-color white-text text-center py-1 ">
-    <strong>LISTE DES ACTIVITE</strong>
-</h5>
-
-<!--Card content-->
-<div class="card-body px-lg-2 pt-0">
-    <table class="table table-info" >
-        <tr>
-            <th class="h4">#</th>
-            <th class="h4">NOM</th>
-            <th class="h3">DATE</th>
-            <th class="h4">LIEU</th>
-            <th class="h4">OBJET</th>
-            <th class="h4">#COMPTE RENDU</th>
-
-        </tr>
-        <?php
-        $personnes = afficherListe();
-        foreach ($personnes as $p){
-            ?>
+    <!--Card content-->
+    <div class="card-body px-lg-2 pt-0">
+        <table class="table table-info" >
             <tr>
-                <td> <?= $p['idactivite'] ?> </td>
-                <td> <?= $p['nom'] ?></td>
-                <td> <?= $p['dateA'] ?> </td>
-                <td> <?= $p['lieu'] ?> </td>
-                <td> <?= $p['objet'] ?> </td>
-                <td> <?= $p['idactivite'] ?> </td>
-                <td> <a href="activity.php?idactiviteSup=<?= $p['idactivite']?>" class="btn btn-sm btn-danger">Supprimer</a></td></td>
-                <td colspan="2"><a href="activity.php?idactiviteMod=<?= $p['idactivite']?>" class="btn btn-sm btn-warning">Modifier</a>
+                <th class="h4">#</th>
+                <th class="h4">Membre</th>
+                <th class="h3">Date</th>
+                <th class="h4">Montant</th>
+                <th class="h4">Description</th>
             </tr>
+            <?php
+            $cotiz = getCotisation();
+            foreach ($cotiz as $p){
+                ?>
+                <tr>
+                    <td> <?= $p['id'] ?> </td>
+                    <td> <?= Find( $p['membre'])['prenomP'] ?></td>
+                    <td> <?= $p['dateC'] ?> </td>
+                    <td> <?= $p['montant'] ?> </td>
+                    <td> <?= $p['description'] ?> </td>
+                    <td> <a href="cotisation.php?idcSup=<?= $p['id']?>" class="btn btn-sm btn-danger">Supprimer</a></td></td>
+                    <td colspan="2"><a href="cotisation.php?idcMod=<?= $p['id']?>" class="btn btn-sm btn-warning">Modifier</a>
+                </tr>
 
-        <?php  }
+            <?php  }
 
-        ?>
+            ?>
 
 
-    </table>
-</div>
+        </table>
+    </div>
 
-<?php
- include_once 'footer.php';
-?>
-
+    <?php
+    include_once 'footer.php';
+    ?>

@@ -1,0 +1,19 @@
+<body>
+  <div id="addDiv">
+    <button onclick="addField()">Add</button>
+  </div>
+</body>
+<script type="text/javascript" >
+    var div = document.getElementById('addDiv');
+    function addInput(name){
+        var input = document.createElement("input");
+        input.name = name;
+        input.type = "text";
+        div.appendChild(input);
+    }
+    function addField() {
+    addInput("test");
+    div.appendChild(document.createElement("br"));
+    }
+    
+</script>

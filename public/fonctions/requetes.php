@@ -110,3 +110,59 @@ require_once 'bdd.php';
         $req = "SELECT * FROM compte_rendu";
         return $base->query($req)->fetchAll();
     }
+    /*  -----------------------------------
+    ----GESTION DES COTISATION-----
+    -----------------------------------
+    */
+    
+    function  getCotisation()
+    {
+        global $base;
+        $req = "SELECT * FROM cotisation";
+        return $base->query($req)->fetchAll();
+
+    }
+    function addCotisation( $date, $membre , $montant, $desc)
+    {
+        global $base;
+       // $req = "INSERT INTO cotisation VALUES (null, '$date', '$membre', '$montant', '$desc')";
+        //$base -> exec($req);
+   
+        try {
+            //code...
+            //echo "Adding...".$desc. " <br>";
+            $stmt = $base->prepare("INSERT INTO cotisation (id, dateC, membre, montant, description) VALUES (NULL, :dateC, :membre, :montant, :desc)");
+            $stmt->bindValue(":dateC", $date);
+            $stmt->bindValue(":membre", $membre);
+            $stmt->bindValue(":montant", $montant);
+            $stmt->bindValue(":desc", $desc);
+            $stmt->execute();
+            echo "Cotisation de " . $date. " ajoutée avec succés!";
+
+           // $req = "INSERT INTO cotisation VALUES (null, '$date', '$membre', '$montant', '$desc')";
+            //$base -> exec($req);
+        } catch (PDOException $e) {
+            $e->getMessage();
+        } catch (Exception $e) {
+            echo "General Error: Cotisation ne peut être ajoutée.<br>".$e->getMessage();
+        }
+     
+    }
+    function supprimerCotisation($id)
+    {
+        global $base;
+
+        return $base->exec("DELETE FROM cotisation WHERE id = $id");
+    }
+    function findCotizByID($id)
+    {
+        global $base;
+        $req = "SELECT * FROM cotisation WHERE id = $id";
+        return $base->query($req)->fetch();
+    }
+    function editCotiz($id, $date, $membre, $montant ,$desc)
+    {
+        global $base;
+        $req = "UPDATE cotisation SET dateC = '$date', membre = '$membre', montant= '$montant', description = '$desc' WHERE id = $id";
+        return $base->exec($req);
+    }
