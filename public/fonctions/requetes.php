@@ -104,6 +104,14 @@ require_once 'bdd.php';
         return $base->exec($req);
     }
 
+    function addCompteRendu($activity, $ordreJour, $contenu )
+    {
+        global $base;
+        $req="INSERT INTO compteRendu values(null, '$activity', '$ordreJour', '$contenu')";
+        //echo "<br> $req";
+        return $base->exec($req);
+    }
+
     function affichage()
     {
         global $base;
