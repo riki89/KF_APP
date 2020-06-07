@@ -2,7 +2,7 @@
 $serveur = 'localhost';
 $dbname = 'kf';
 $user = 'root';
-$mdp = 'P@sser123';
+$mdp = 'root';
 
 try {
     $base = new PDO('mysql:host='.$serveur.';dbname='.$dbname,$user,$mdp,

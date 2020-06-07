@@ -1,8 +1,8 @@
 <?php
 include_once '../public/fonctions/requetes.php';
 include_once '../folders/navbar.php';
-include_once '../public/header.php';
-
+include_once '../folder/header.php';
+include_once 'navbar.php';
 
 
 if (isset($_POST['ajouter']))
@@ -32,6 +32,31 @@ if (isset($_POST['ajouter']))
 
                 <!-- Name -->
                 <!--fieldset-->
+                
+                
+                <div class="row mt-3" >
+                    <div class="col-md-3 text-center ">
+                        <label for="membre" class="h5">Activite</label>
+                    </div>
+                    <div class="col-md-2">
+                        <select default="Selectionner" name="membre">
+                            <option value="" selected>
+                                Choir une activite 
+                            </option>
+                                <?php
+                                $membres = getActi();
+                                foreach ($membres as $membre)
+                                {?>
+                                    <option value = "<?= $membre['idactivite']?>" >
+                                        <?= $membre['nom']?>
+                                    </option>
+                                <?php } ?>
+                        </select> 
+                    </div>
+                </div>
+                    
+
+
                     <div class="row mt-4" >
                         <div class="col-md-3">
                             <label>Ordre du jour</label>
