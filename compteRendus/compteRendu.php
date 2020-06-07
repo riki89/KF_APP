@@ -15,8 +15,6 @@ if (isset($_POST['ajouter']))
    
 
 ?>
-<html>
-<head> 
 
 	<!-- Material form subscription -->
     <div class="card mt-4 container col-md-8">
@@ -29,74 +27,42 @@ if (isset($_POST['ajouter']))
         <div class="card-body">
 
             <!-- Form -->
-            <form class="text-center" style="color: #757575;" action="#!" method="post">
+            <form class="text-center" id = "form" style="color: #757575;" action="#!" method="post">
 
                 <!-- Name -->
-                <div class="row mt-4" >
-                    <div class="col-md-3">
-                        <label>ordre du jour</label>
+                <!--fieldset-->
+                    <div class="row mt-4" >
+                        <div class="col-md-3">
+                            <label>Ordre du jour</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="textArea" name="odj" class="form-control" placeholder="Saisir l'ordre du jour">
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <input type="text" name="odj" class="form-control" placeholder="entrer l'ordre du jour">
-                    </div>
-                </div>
 
-                <div class="row mt-4" >
-                    <div class="col-md-3">
-                        <label>point 1</label>
+                    <div class="row mt-4" id = "content">
+                        <div class="col-md-3">
+                            <!--label>Point </label-->
+                        </div>
+                        <div class="col-md-5">
+                            <textarea name="point1" class="form-control"> Entrer du contenu... </textarea>
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <input type="text" name="point1" class="form-control" placeholder="entrer le point1">
-                    </div>
-                </div>
 
-                <div class="row mt-4" >
-                    <div class="col-md-3">
-                        <label>point 2</label>
+                    <div id = "addDiv">
                     </div>
-                    <div class="col-md-5">
-                        <input type="text" name="point2" class="form-control" placeholder="entrer le point2">
-                    </div>
-                </div>
 
-                <div class="row mt-4" >
-                    <div class="col-md-3">
-                        <label>point 3</label>
+                    <div class="row mt-4" id = "lastDiv" >
+                        <div class="col-md-3">
+                            <label>Ajouter un autre point</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type = "button" value = "Ajouter un autre point" class="form-control" onClick="cloneDiv()">
+                        </div>
                     </div>
-                    <div class="col-md-5">
-                        <input type="text" name="point3" class="form-control" placeholder="entrer le point3">
-                    </div>
-                </div>
-
-                <div class="row mt-4" >
-                    <div class="col-md-3">
-                        <label>point 4</label>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" name="point4" class="form-control" placeholder="entrer le point4">
-                    </div>
-                </div>
-
-                <div class="row mt-4" >
-                    <div class="col-md-3">
-                        <label>point 5</label>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" name="point5" class="form-control" placeholder="entrer le point 5">
-                    </div>
-                </div>
-
-                <div class="row mt-4" >
-                    <div class="col-md-3">
-                        <label>divers</label>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" name="divers" class="form-control" placeholder="divers">
-                    </div>
-                </div>
-
+                <!--/fieldset -->
                 <!-- Sign in button -->
-                <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit" name= "ajouter">valider</button>
+                <button id = "myButton" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit" name= "ajouter">valider</button>
 
             </form>
             <!-- Form -->
@@ -114,13 +80,13 @@ if (isset($_POST['ajouter']))
         <table class="table table-info">
             <tr>
                 <th class="h4">#</th>
-                <th class="h3">ordre du jour</th>
-                <th class="h4">point 1</th>
-                <th class="h4">point 2</th>
-                <th class="h4">point 3</th>
-                <th class="h4">point 4</th>
-                <th class="h4">point 5</th>
-                <th class="h4">divers</th>
+                <th class="h3">Ordre du jour</th>
+                <th class="h4">Point 1</th>
+                <th class="h4">Point 2</th>
+                <th class="h4">Point 3</th>
+                <th class="h4">Point 4</th>
+                <th class="h4">Point 5</th>
+                <th class="h4">Divers</th>
             </tr>
             <?php
             $compteRendu = affichage();
@@ -135,20 +101,24 @@ if (isset($_POST['ajouter']))
                     <td> <?= $p['point4'] ?> </td>
                     <td> <?= $p['point5'] ?> </td>
                     <td> <?= $p['divers'] ?> </td>
-                    
-                    
                 </tr>
-                
-
             <?php  }
-
             ?>
-
-
         </table>
     </div>
 
     </div>
 </body>
+    <script type="text/javascript" >
+            function cloneDiv()
+            {
+                var dv = document.getElementById("content");
+                var parent = dv.parentNode;
+                var btnDiv = document.getElementById("lastDiv");
+                var toAdd = dv.cloneNode(true);
+                parent.insertBefore(toAdd, btnDiv);
+            }
+            
+    </script>
 </html>
 
