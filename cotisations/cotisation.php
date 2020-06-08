@@ -24,7 +24,9 @@
         {
             extract($_POST);
            // echo "Member: ".$membre." date: ".$dateC." montant: ".$montant." desc: ".$desc;
-            addCotisation( $dateC, $membre, $montant, $desc) ;
+            $dateC = findLastCotiz($membre)['next_month'];
+            echo "last date: ".$dateC;
+            //addCotisation( $dateC, $membre, $montant, $desc) ;
             echo "Insertion realisee avec succes ";
         }
     }

@@ -180,6 +180,16 @@ require_once 'bdd.php';
         $req = "SELECT * FROM cotisation WHERE id = $id";
         return $base->query($req)->fetch();
     }
+
+    function findLastCotiz($membre)
+    {
+        global $base;
+        $lastday = last_day(concat( YEAR( SYSDATE()), "-01-03") );
+        $req = "SELECT MAX(dateC) max_date, SYSDATE() next_month FROM cotisation WHERE membre = $membre";
+        echo req;
+        return $base->query($req)->fetch();
+    }
+
     function editCotiz($id, $date, $membre, $montant ,$desc)
     {
         global $base;
