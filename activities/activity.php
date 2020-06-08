@@ -146,6 +146,6 @@ if(isset($_GET['idactiviteSup']))
 </div>
 
 <?php
-// include_once 'footer.php';
+
 ?>
 

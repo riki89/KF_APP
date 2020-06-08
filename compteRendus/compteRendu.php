@@ -1,17 +1,27 @@
 <?php
 include_once '../public/fonctions/requetes.php';
 include_once '../folders/navbar.php';
-include_once '../folder/header.php';
-include_once 'navbar.php';
+include_once '../public/header.php';
+//include_once '../navbar.php';
 
 
 if (isset($_POST['ajouter']))
 {
    header('location:compteRendu.php');
     extract($_POST);
+<<<<<<< HEAD
     addCompteRendu($odj, $point1, $point2, $point3, $point4, $point5, $divers ) ;
     //addCompteRendu($odj, $activity, $ordreJour, $contenu) ;
     
+=======
+    //addCompteRendu($odj, $point1, $point2, $point3, $point4, $point5, $divers ) ;
+    //echo "odj: ".$odj; //.
+    //echo "string";
+    //echo " activite: ".$activite;
+    //echo " contenu: ".$contenu;
+    addCompteRendu_new($activity, $odj, $contenu) ;  
+    //addCompteRendu_new(1, "ODJ", "Content") ; 
+>>>>>>> 65d1f93e7f5b4301b88151a25d47ce0308f54659
 }
    
 
@@ -36,19 +46,19 @@ if (isset($_POST['ajouter']))
                 
                 <div class="row mt-3" >
                     <div class="col-md-3 text-center ">
-                        <label for="membre" class="h5">Activite</label>
+                        <label for="act" class="h5">Activite</label>
                     </div>
                     <div class="col-md-2">
-                        <select default="Selectionner" name="membre">
+                        <select default="Selectionner" name="activity">
                             <option value="" selected>
                                 Choir une activite 
                             </option>
                                 <?php
-                                $membres = getActi();
-                                foreach ($membres as $membre)
+                                $activities = getActi();
+                                foreach ($activities as $act)
                                 {?>
-                                    <option value = "<?= $membre['idactivite']?>" >
-                                        <?= $membre['nom']?>
+                                    <option value = "<?= $act['idactivite']?>" >
+                                        <?= $act['nom']?>
                                     </option>
                                 <?php } ?>
                         </select> 
@@ -66,12 +76,12 @@ if (isset($_POST['ajouter']))
                         </div>
                     </div>
 
-                    <div class="row mt-4" id = "content">
+                    <div class="row mt-4" id = "contenu">
                         <div class="col-md-3">
                             <!--label>Point </label-->
                         </div>
                         <div class="col-md-5">
-                            <textarea name="point1" class="form-control"> Entrer du contenu... </textarea>
+                            <textarea name="contenu" class="form-control"> Entrer du contenu... </textarea>
                         </div>
                     </div>
 
@@ -105,14 +115,14 @@ if (isset($_POST['ajouter']))
     <div class="card-body px-lg-2 pt-0">
         <table class="table table-info">
             <tr>
-                <th class="h4">#</th>
-                <th class="h3">Ordre du jour</th>
-                <th class="h4">Point 1</th>
-                <th class="h4">Point 2</th>
-                <th class="h4">Point 3</th>
-                <th class="h4">Point 4</th>
-                <th class="h4">Point 5</th>
-                <th class="h4">Divers</th>
+               <!--<th class="h4">#</th>--> 
+                <th class="h3">ID</th>
+                <th class="h4">Activity</th>
+                <th class="h4">Ordre du jour</th>
+                <th class="h4">Contenu</th>
+                <th class="h4">Actions</th>
+                <!--Card content <th class="h4">Point 4</th>
+                <th class="h4">Divers</th> -->
             </tr>
             <?php
             $compteRendu = affichage();
@@ -120,17 +130,22 @@ if (isset($_POST['ajouter']))
                 ?>
                 <tr>
                     <td> <?= $p['id'] ?> </td>
-                    <td> <?= $p['odj'] ?></td>
-                    <td> <?= $p['point1'] ?> </td>
-                    <td> <?= $p['point2'] ?> </td>
-                    <td> <?= $p['point3'] ?> </td>
-                    <td> <?= $p['point4'] ?> </td>
+                    <td> <?= $p['activity'] ?></td>
+                    <td> <?= $p['ordreJour'] ?> </td>
+                    <td> <?= $p['contenu'] ?> </td>
+                   <!-- <td colspan="2"><a href="modifier.php?modifier&idP=<?= $p['idP'] ?>"-->
+                                      <td colspan="2"><a href="#" class="btn btn-sm btn-warning">Modifier</a>
+                    <!-- <a href="profilCtrl.php?idPSup=<?= $p['idP'] ?>"--> <a href="#" class="btn btn-sm btn-danger">Supprimer</a>
+                    </td>
+            
+                    <!--<td> <?= $p[''] ?> </td>
+                     <td> <?= $p['point4'] ?> </td>
                     <td> <?= $p['point5'] ?> </td>
-                    <td> <?= $p['divers'] ?> </td>
+                    <td> <?= $p['divers'] ?> </td> -->
                 </tr>
             <?php  }
             ?>
-        </table>
+       </table>
     </div>
 
     </div>
