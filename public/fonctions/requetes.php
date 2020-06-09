@@ -64,12 +64,22 @@ require_once 'bdd.php';
         $req = "INSERT INTO activite VALUES (null,  '$nom', '$date', '$lieu', '$objet', 0)";
         $base->exec($req);
     }
+
+    function  getActi()
+    {
+        global $base;
+        $req = "SELECT * FROM  activite WHERE idactivite = idactivite ORDER BY idactivite";
+        return $base->query($req)->fetchAll();
+
+    }
+
+   
     
     function getActivite($id)
     {
         global $base;
         $req = "SELECT * FROM activite WHERE idactivite = $id";
-        return $base->query($req)->fetch();
+        return $base->query($req)->fetchAll();
     }
     function afficherListe()
     {
@@ -100,6 +110,15 @@ require_once 'bdd.php';
     {
         global $base;
         $req="INSERT INTO compte_rendu values(null, '$odj', '$point1', '$point2', '$point3', '$point4', '$point5', '$divers')";
+        //$req="INSERT INTO compterendu values(null, '$activity', '$ordreJour', '$contenu',)";
+        //echo "<br> $req";
+        return $base->exec($req);
+    }
+
+    function addCompteRendu_new($activity, $ordreJour, $contenu )
+    {
+        global $base;
+        $req="INSERT INTO compterendu values(null, $activity, '$ordreJour', '$contenu')";
         //echo "<br> $req";
         return $base->exec($req);
     }
@@ -107,7 +126,8 @@ require_once 'bdd.php';
     function affichage()
     {
         global $base;
-        $req = "SELECT * FROM compte_rendu";
+        //$req = "SELECT * FROM compte_rendu";
+        $req = "SELECT * FROM compterendu";
         return $base->query($req)->fetchAll();
     }
     /*  -----------------------------------
