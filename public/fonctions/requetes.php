@@ -106,6 +106,15 @@ require_once 'bdd.php';
     ----GESTION DES COMPTES RENDUS-----
     -----------------------------------
 */
+
+    /*Requete pour recuperer un compte rendu*/
+    function findCompteRendu($id)
+    {
+        global $base;
+        $req = "SELECT * FROM compterendu WHERE id = $id";
+        return $base->query($req)->fetch();
+    }
+
     function addCompteRendu( $odj, $point1, $point2, $point3, $point4, $point5, $divers )
     {
         global $base;
@@ -130,6 +139,25 @@ require_once 'bdd.php';
         $req = "SELECT * FROM compterendu";
         return $base->query($req)->fetchAll();
     }
+    /*------------------------------------------------
+    ----Foctions pour modifier un compte rendu--
+    --------------------------------------------------
+    */
+    function modifiercompterendu($id, $activity , $ordreJour, $contenu)
+    {
+        global $base;
+        $req = "UPDATE compterendu SET id = '$id' , activity = '$activity', ordreJour ='$ordreJour', contenu='$contenu' WHERE id = '$id' ";
+        
+        $base -> exec($req);
+    
+    }
+    //supprimer un compte redu
+        function supprimercompterendu($id)
+    {
+        global $base;
+        return $base-> exec("DELETE FROM compterendu WHERE id= $id");
+    }
+
     /*  -----------------------------------
     ----GESTION DES COTISATION-----
     -----------------------------------
