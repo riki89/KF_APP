@@ -166,7 +166,7 @@ require_once 'bdd.php';
     function  getCotisation()
     {
         global $base;
-        $req = "SELECT * FROM cotisation";
+        $req = "SELECT * FROM cotisation ";
         return $base->query($req)->fetchAll();
 
     }

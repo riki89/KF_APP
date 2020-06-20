@@ -24,7 +24,7 @@ $personne = getPersonne();
         <table class="table table-info" color="red">
             <tr>
 
-                <th class="h4">ID</th>
+                <th class="h4">IMAGE</th>
                 <th class="h4">NOM</th>
                 <th class="h4">PRENOM</th>
                 <th class="h4">TELEPHONE</th>
@@ -39,7 +39,9 @@ $personne = getPersonne();
             foreach ($personne as $p) {
                 ?>
                 <tr>
-                    <td><?= $p['idP'] ?></td>
+                  
+                   
+                    <td><img src="../public/images/<?= $p['telephoneP']?>.JPG" width="100px" height="95px"></td>
                     <td><?= $p['nomP'] ?></td>
                     <td><?= $p['prenomP'] ?></td>
                     <td><?= $p['telephoneP'] ?></td>
