@@ -50,7 +50,7 @@
                     <label>TEL</label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="tel" class="form-control">
+                    <input type="text" name="tel" class="form-control" placeholder="+221 7X XXX XX XX">
                 </div>
 
             </div>
@@ -59,7 +59,7 @@
                     <label>MAIL</label>
                 </div>
                 <div class="col-md-5">
-                    <input type="mail" name="mail" class="form-control">
+                    <input type="email" name="mail" class="form-control">
                 </div>
 
             </div>
@@ -78,15 +78,28 @@
                 <div class="col-md-3">
                     <label>FONCTION</label>
                 </div>
+
                 <div class="col-md-5">
-                    <input type="text" name="fonction" class="form-control">
+                    <!--input type="text" name="fonction" class="form-control"-->
+                    <select default="Selectionner une fonction" name="fonction" required>
+                        <option value="" selected>
+                            Choir une fonction 
+                        </option>
+                        <option> Etudiant(e)</option>
+                        <option> Ingénieur</option>
+                        <option> Commerçant(e)</option>
+                        <option> Médecin</option>
+                        <option> Plombier</option>
+                        <option> Tapissier</option>
+                        <option> Autres</option>
+                    </select> 
                 </div>
 
             </div>
 
             <div class="row mt-4">
                 <div class="col-md-3">
-                    <label>NOM D'UTILI</label>
+                    <label>NOM D'UTILISATEUR</label>
                 </div>
                 <div class="col-md-5">
                     <input type="text" name="login" class="form-control">
@@ -99,7 +112,7 @@
                     <label>MOT DE PASSE</label>
                 </div>
                 <div class="col-md-5">
-                    <input type="text" name="mdp" class="form-control">
+                    <input type="password" name="mdp" class="form-control">
                 </div>
             </div>
 

@@ -4,7 +4,7 @@ require_once 'bdd.php';
     function  getPersonne()
     {
         global $base;
-        $req = "SELECT * FROM  personne WHERE idP = idP ORDER BY idP";
+        $req = "SELECT * FROM  personne WHERE idP = idP ORDER BY prenomP";
         return $base->query($req)->fetchAll();
 
     }
@@ -84,7 +84,7 @@ require_once 'bdd.php';
     function afficherListe()
     {
         global $base;
-        $req = "SELECT * FROM activite  ";
+        $req = "SELECT * FROM activite";
         return $base->query($req)->fetchAll();
     }
 
@@ -118,7 +118,7 @@ require_once 'bdd.php';
     function addCompteRendu_new($activity, $ordreJour, $contenu )
     {
         global $base;
-        $req="INSERT INTO compterendu values(null, $activity, '$ordreJour', '$contenu')";
+        $req="INSERT INTO compteRendu values(null, $activity, '$ordreJour', '$contenu')";
         //echo "<br> $req";
         return $base->exec($req);
     }
@@ -136,73 +136,14 @@ require_once 'bdd.php';
     function affichage()
     {
         global $base;
-        //$req = "SELECT * FROM compte_rendu";
-        $req = "SELECT * FROM compterendu";
+        $req = "SELECT * FROM compte_rendu";
+        //$req = "SELECT * FROM compterendu";
         return $base->query($req)->fetchAll();
     }
-    /*  -----------------------------------
-    ----GESTION DES COTISATION-----
-    -----------------------------------
-    */
-    
-    function  getCotisation()
+    function cptRenduList()
     {
         global $base;
-        $req = "SELECT * FROM cotisation";
+        //$req = "SELECT * FROM compteRendu";
+        $req = "SELECT * FROM compteRendu";
         return $base->query($req)->fetchAll();
-
-    }
-    function addCotisation( $date, $membre , $montant, $desc)
-    {
-        global $base;
-       // $req = "INSERT INTO cotisation VALUES (null, '$date', '$membre', '$montant', '$desc')";
-        //$base -> exec($req);
-   
-        try {
-            //code...
-            //echo "Adding...".$desc. " <br>";
-            $stmt = $base->prepare("INSERT INTO cotisation (id, dateC, membre, montant, description) VALUES (NULL, :dateC, :membre, :montant, :desc)");
-            $stmt->bindValue(":dateC", $date);
-            $stmt->bindValue(":membre", $membre);
-            $stmt->bindValue(":montant", $montant);
-            $stmt->bindValue(":desc", $desc);
-            $stmt->execute();
-            echo "Cotisation de " . $date. " ajoutée avec succés!";
-
-           // $req = "INSERT INTO cotisation VALUES (null, '$date', '$membre', '$montant', '$desc')";
-            //$base -> exec($req);
-        } catch (PDOException $e) {
-            $e->getMessage();
-        } catch (Exception $e) {
-            echo "General Error: Cotisation ne peut être ajoutée.<br>".$e->getMessage();
-        }
-     
-    }
-    function supprimerCotisation($id)
-    {
-        global $base;
-
-        return $base->exec("DELETE FROM cotisation WHERE id = $id");
-    }
-    function findCotizByID($id)
-    {
-        global $base;
-        $req = "SELECT * FROM cotisation WHERE id = $id";
-        return $base->query($req)->fetch();
-    }
-
-    function findLastCotiz($membre)
-    {
-        global $base;
-        $lastday = last_day(concat( YEAR( SYSDATE()), "-01-03") );
-        $req = "SELECT MAX(dateC) max_date, SYSDATE() next_month FROM cotisation WHERE membre = $membre";
-        echo req;
-        return $base->query($req)->fetch();
-    }
-
-    function editCotiz($id, $date, $membre, $montant ,$desc)
-    {
-        global $base;
-        $req = "UPDATE cotisation SET dateC = '$date', membre = '$membre', montant= '$montant', description = '$desc' WHERE id = $id";
-        return $base->exec($req);
     }

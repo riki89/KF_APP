@@ -9,19 +9,8 @@ if (isset($_POST['ajouter']))
 {
    header('location:compteRendu.php');
     extract($_POST);
-<<<<<<< HEAD
-    addCompteRendu($odj, $point1, $point2, $point3, $point4, $point5, $divers ) ;
-    //addCompteRendu($odj, $activity, $ordreJour, $contenu) ;
-    
-=======
     //addCompteRendu($odj, $point1, $point2, $point3, $point4, $point5, $divers ) ;
-    //echo "odj: ".$odj; //.
-    //echo "string";
-    //echo " activite: ".$activite;
-    //echo " contenu: ".$contenu;
     addCompteRendu_new($activity, $odj, $contenu) ;  
-    //addCompteRendu_new(1, "ODJ", "Content") ; 
->>>>>>> 65d1f93e7f5b4301b88151a25d47ce0308f54659
 }
    
 
@@ -54,7 +43,7 @@ if (isset($_POST['ajouter']))
                                 Choir une activite 
                             </option>
                                 <?php
-                                $activities = getActi();
+                                $activities = afficherListe();
                                 foreach ($activities as $act)
                                 {?>
                                     <option value = "<?= $act['idactivite']?>" >
@@ -125,7 +114,7 @@ if (isset($_POST['ajouter']))
                 <th class="h4">Divers</th> -->
             </tr>
             <?php
-            $compteRendu = affichage();
+            $compteRendu = cptRenduList();
             foreach ($compteRendu as $p){
                 ?>
                 <tr>

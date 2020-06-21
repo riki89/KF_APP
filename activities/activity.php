@@ -99,13 +99,6 @@ if(isset($_GET['idactiviteSup']))
 </div>
 <br>
 <br>
-
-
-
-
-
-
-
 <h5 class="card-header aqua-gradient info-color white-text text-center py-1 ">
     <strong>LISTE DES ACTIVITE</strong>
 </h5>

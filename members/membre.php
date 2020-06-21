@@ -6,10 +6,7 @@ include_once '../public/header.php';
 require_once '../public/fonctions/requetes.php';
 $personne = getPersonne();
 
-
 ?>
-
-
 <!-- Material form login -->
 
 

@@ -24,6 +24,7 @@
                 <th class="h4">Octobre</th>
                 <th class="h4">Novembre</th>
                 <th class="h4">Decembre</th>
+                <th class="h4">Total</th>
             </tr>
             <?php
             $pers = getPersonne();
@@ -67,9 +68,10 @@
                             //echo "truv: ".$truv;
                            // echo "i: ".$i;
                            
-                        }
-                         
+                        } 
+                         echo "<td>".getTotal($p['idP'])['total']."</td>";
                         ?>
+                        
                     </tr>
             <?php
             }
