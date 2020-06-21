@@ -1,13 +1,13 @@
 <?php
-include_once '../public/fonctions/requetes.php';
-include_once '../folders/navbar.php';
-include_once '../public/header.php';
-//include_once '../navbar.php';
+require_once '../public/fonctions/requetes.php';
+require_once '../folders/navbar.php';
+require_once '../public/header.php';
+//require_once '../navbar.php';
 
 
 if (isset($_POST['ajouter']))
 {
-   header('location:compteRendu.php');
+   //header('location:compteRendu.php');
     extract($_POST);
     //addCompteRendu($odj, $point1, $point2, $point3, $point4, $point5, $divers ) ;
     addCompteRendu_new($activity, $odj, $contenu) ;  
@@ -122,9 +122,10 @@ if (isset($_POST['ajouter']))
                     <td> <?= $p['activity'] ?></td>
                     <td> <?= $p['ordreJour'] ?> </td>
                     <td> <?= $p['contenu'] ?> </td>
-                   <!-- <td colspan="2"><a href="modifier.php?modifier&idP=<?= $p['idP'] ?>"-->
-                                      <td colspan="2"><a href="#" class="btn btn-sm btn-warning">Modifier</a>
-                    <!-- <a href="profilCtrl.php?idPSup=<?= $p['idP'] ?>"--> <a href="#" class="btn btn-sm btn-danger">Supprimer</a>
+                 <!-- gestion de modification et de suppression-->
+                 <!-- <td colspan="2"><a href="modifier.php?modifier&idP=<?= $p['idP'] ?>"-->
+                <td colspan="2"><a href="modifiercompterendu.php?id=<?= $p['id']?>" class="btn btn-sm btn-warning">Modifier</a></td>
+                   <td> <a href="supprimercompterendu.php?id=<?= $p['id']?>" class="btn btn-sm btn-danger">Supprimer</a>
                     </td>
             
                     <!--<td> <?= $p[''] ?> </td>

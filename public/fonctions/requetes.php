@@ -106,6 +106,15 @@ require_once 'bdd.php';
     ----GESTION DES COMPTES RENDUS-----
     -----------------------------------
 */
+
+    /*Requete pour recuperer un compte rendu*/
+    function findCompteRendu($id)
+    {
+        global $base;
+        $req = "SELECT * FROM compterendu WHERE id = $id";
+        return $base->query($req)->fetch();
+    }
+
     function addCompteRendu( $odj, $point1, $point2, $point3, $point4, $point5, $divers )
     {
         global $base;
