@@ -58,7 +58,8 @@
         $id = $_GET['idcMod'];
         $cotiz = findCotizByID($id);
         //print_r ($act);
-    }
+    }else
+        $cotiz= null
 
     if(isset($_GET['idcSup']))
     {
@@ -90,7 +91,6 @@
                                      Choisir un membre
                                     </option>
                                         <?php
-                                        $membres = getPersonne();
                                         foreach ($membres as $membre)
                                         {?>
                                             <option value = "<?= $membre['idP']?>" >

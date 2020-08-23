@@ -3,7 +3,8 @@ include_once 'navbar.php';
 include_once '../public/header.php';
 require_once '../public/fonctions/requetes.php';
 $personne = getPersonne();
-
+$membres = getPersonne();
+                 
 
 ?>
 
