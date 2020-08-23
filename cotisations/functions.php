@@ -41,6 +41,11 @@
      
     }
 
+    function insertCotisation($montant)
+    {
+        
+    }
+
     function addCotisation( $date, $membre , $montant, $desc, $dateSaisi)
     {
         global $base;

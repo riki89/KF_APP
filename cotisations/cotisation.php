@@ -1,3 +1,4 @@
+
 <?php
 
     include_once '../public/fonctions/requetes.php';
@@ -24,21 +25,31 @@
         } else
         {
             extract($_POST);
-            $dateSaisi = $dateC; 
-            $dateC = findLastCotiz($membre)['max_date'];
-            if ( is_null($dateC))
+            
+            if ($montant % 1000 == 0)
             {
-                $dateC = getNextMonth();
-                //echo "<br> Date Null: ".$dateC;
-            } else 
-            {
-                $dateC = getNextMonthV2($dateC);
-                //echo "<br> Date Not Null: ".$dateC['next_month'];
+                $toInsVal = 0;
+                while ($toInsVal != $montant)
+                {
+                    $dateSaisi = $dateC; 
+                    $dateC = findLastCotiz($membre)['max_date'];
+                    if ( is_null($dateC))
+                    {
+                        //on cherche le premier mois de l'anne en cours
+                        $dateC = getNextMonth();
+                        //echo "<br> Date Null: ".$dateC;
+                    } else 
+                    {
+                        //on cherche le prochain mois qu'il doit cotiser
+                        $dateC = getNextMonthV2($dateC);
+                        //echo "<br> Date Not Null: ".$dateC['next_month'];
+                    }
+                    addCotisation( $dateC['next_month'], $membre, 1000, $desc, $dateSaisi) ;
+                    $toInsVal += 1000;
+                }
+                echo "Insertion realisee avec succes ";
             }
-            //echo "<br> Date Histo: ".$dateSaisi; 
-
-            addCotisation( $dateC['next_month'], $membre, $montant, $desc, $dateSaisi) ;
-            echo "Insertion realisee avec succes ";
+            //echo "<br> Date Histo: ".$dateSaisi;
             
         }
     }
@@ -92,11 +103,11 @@
                                 <label for="tel" class="h5">MONTANT</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="number" min = "1000" class="form-control" name="montant" value="<?= $cotiz['montant'] ?>"  placeholder="montant" required>
+                                <input id="mnt" type="number" min = "1000" class="form-control" name="montant" value="<?= $cotiz['montant'] ?>"  placeholder="montant" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <div class="col-md-2 text-center">
-                                    <label for="inputCity">DATE</label>
+                                    <label for="date">DATE</label>
                                 </div>
                                     <input type="date" class="form-control" name="dateC"  value="<?= $cotiz['dateC'] ?>" id="inputCity" required>
                             </div>
@@ -104,7 +115,7 @@
                                 <div class="col-md-2 text-center">
                                     <label for="inputCity">DESCRIPTION</label>
                                 </div>
-                                    <input type="TEXTAREA" class="form-control" name="desc"  value="<?= $cotiz['description'] ?>" id="desc" required>
+                                    <input type="TEXTAREA" id="desc" class="form-control" name="desc"  value="<?= $cotiz['description'] ?>" id="desc" required>
                             </div>
                         </div>
                         <button type="submit" name="ajouter" class="btn btn-primary">ENREGISTRER</button>
@@ -151,8 +162,11 @@
 
 
         </table>
+
+  
     </div>
 
     <?php
   //  include_once 'footer.php';
     ?>
+<script type = "text/javascript" src = "js/cotisation.js"> </script>
